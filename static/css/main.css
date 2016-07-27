@@ -1296,6 +1296,9 @@ textarea {
       outline: 0;
       box-shadow: none; }
 
+.active {
+  color: #4A80F5; }
+
 .onoffswitch {
   position: relative;
   width: 50px;

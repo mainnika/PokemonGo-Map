@@ -485,6 +485,25 @@ function updateMap() {
 window.setInterval(updateMap, 5000);
 updateMap();
 
+$('#set-current-location').click(function setCurrentLocationClick() {
+
+	if (!("geolocation" in navigator)) {
+		return alert("Loc n/a");
+	}
+
+	navigator.geolocation.getCurrentPosition(function (position) {
+
+		var lat = position.coords.latitude;
+		var lng = position.coords.longitude;
+
+		$.post("next_loc?lat=" + lat + "&lon=" + lng, {}).done(function (data) {
+			$("#next-location").attr("placeholder", lat + ', ' + lng);
+			map.setCenter({lat: lat, lng: lng});
+			marker.setPosition({lat: lat, lng: lng});
+		});
+	});
+})
+
 document.getElementById('gyms-switch').onclick = function() {
     localStorage["showGyms"] = this.checked;
     if (this.checked) {
